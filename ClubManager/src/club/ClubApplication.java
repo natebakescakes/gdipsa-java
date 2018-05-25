@@ -14,12 +14,11 @@ public class ClubApplication {
 		club.addMember("John", "Smith");
 		
 		club.removeMember(2);
-
+		
+		club.addFacility("Basketball Court", "The club's one and only basketball court.");
+		club.addFacility("Tennis Court");
+		
 		System.out.println(club);
-		
-		System.out.println(new Facility("Basketball Court", "The club's one and only basketball court."));
-		System.out.println(new Facility("Tennis Court"));
-		
 	}
 
 }

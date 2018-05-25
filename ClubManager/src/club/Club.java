@@ -1,62 +1,103 @@
 package club;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Club {
 	
 	private int membershipNumber;
-	private int currentMemberSize;
-	private Member[] members;
+	private ArrayList<Member> members;
+	private HashMap<String, Facility> facilities;
 
 	public Club(int initMemberSize) {
 		membershipNumber = 0;
-		this.currentMemberSize = initMemberSize;
-		members = new Member[this.currentMemberSize];
+		members = new ArrayList<Member>();
+		facilities = new HashMap<String, Facility>();
 	}
 	
+	// Member Management
+	
 	public Member addMember(String firstName, String secondName, String surname) {
-		try {
-			members[membershipNumber] = new Member(firstName, secondName, surname, membershipNumber + 1);
-		}
-		catch (ArrayIndexOutOfBoundsException e) {
-			expandMembershipSize(currentMemberSize * 2);
-			members[membershipNumber] = new Member(firstName, secondName, surname, membershipNumber + 1);
-		}
-		
 		membershipNumber++;
-		return members[membershipNumber - 1];
+		
+		Member member = new Member(firstName, secondName, surname, membershipNumber);
+		members.add(member);
+		
+		return member;
 	}
 	
 	public Member addMember(String firstName, String surname) {
-		try {
-			members[membershipNumber] = new Member(firstName, surname, membershipNumber + 1);
-		}
-		catch (ArrayIndexOutOfBoundsException e) {
-			expandMembershipSize(currentMemberSize * 2);
-			members[membershipNumber] = new Member(firstName, surname, membershipNumber + 1);
-		}
 		membershipNumber++;
-		return members[membershipNumber - 1];
+		
+		Member member = new Member(firstName, surname, membershipNumber);
+		members.add(member);
+		
+		return member;
 	}
 
-	private void expandMembershipSize(int newMemberSize) {
-		Member[] newMembers = new Member[newMemberSize];
-		System.arraycopy(members, 0, newMembers, 0, currentMemberSize);
-		currentMemberSize = newMemberSize;
-		members = newMembers;
+	public void removeMember(int membershipNumber) {
+		for (Member member : members) {
+			if (member.getMembershipNumber() == membershipNumber) {
+				members.remove(member);
+				break;
+			}
+		}
 		
 		return;
 	}
 	
-	public void removeMember(int membershipNumber) {
-		members[membershipNumber - 1] = null;
+	// Facility Management
+	
+	public Facility getFacility(String name) {
+		return facilities.get(name);
+	}
+	
+	public ArrayList<Facility> getFacilities() {
+		ArrayList<Facility> facilities = new ArrayList<Facility>();
+		
+		for (Facility facility : this.facilities.values()) {
+			facilities.add(facility);
+		}
+		
+		return facilities;
+	}
+	
+	public Facility addFacility(String name, String description) {
+		Facility facility = new Facility(name, description);
+		facilities.put(name, facility);
+		
+		return facility;
+	}
+	
+	public Facility addFacility(String name) {
+		Facility facility = new Facility(name);
+		facilities.put(name, facility);
+		
+		return facility;
+	}
+	
+	public void removeFacility(String name) {
+		facilities.remove(name);
+		
 		return;
 	}
 
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
+		
+		sb.append("Members:\n");
 		for (Member member : members) {
 			if (member != null) {
 				sb.append(member);
+				sb.append("\n");
+			}
+		}
+		
+		sb.append("Facilities: \n");
+		for (Facility facility : facilities.values()) {
+			if (facility != null) {
+				sb.append(facility);
 				sb.append("\n");
 			}
 		}
