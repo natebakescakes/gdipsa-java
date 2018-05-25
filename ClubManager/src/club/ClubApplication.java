@@ -5,12 +5,14 @@ public class ClubApplication {
 	public static void main(String[] args) {
 		
 		Club club = new Club(5);
-		System.out.println(club.addMember("John", "Milton", "Smith"));
-		System.out.println(club.addMember("John", "Smith"));
-		System.out.println(club.addMember("John", "Smith"));
-		System.out.println(club.addMember("John", "Smith"));
-		System.out.println(club.addMember("John", "Smith"));
-		System.out.println(club.addMember("John", "Smith"));
+		
+		club.addMember("John", "Milton", "Smith");
+		club.addMember("John", "Smith");
+		club.addMember("John", "Smith");
+		club.addMember("John", "Smith");
+		club.addMember("John", "Smith");
+		club.addMember("John", "Smith");
+		
 		club.removeMember(2);
 
 		System.out.println(club);

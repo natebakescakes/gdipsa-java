@@ -20,7 +20,7 @@ public class Member extends Person {
 
 	@Override
 	public String toString() {
-		return String.format("%d, %s", this.membershipNumber, super.toString());
+		return String.format("%d: %s", this.membershipNumber, super.toString());
 	}
 	
 }
