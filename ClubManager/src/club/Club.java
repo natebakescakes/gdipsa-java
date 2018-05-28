@@ -46,6 +46,20 @@ public class Club {
 		return;
 	}
 	
+	public ArrayList<Member> getMembers() {
+		return new ArrayList<Member>(members);
+	}
+	
+	public Member getMember(int memberId) {
+		for (Member member : members) {
+			if (member.getMembershipNumber() == memberId) {
+				return member;
+			}
+		}
+		
+		return null;
+	}
+	
 	// Facility Management
 	
 	public Facility getFacility(String name) {
