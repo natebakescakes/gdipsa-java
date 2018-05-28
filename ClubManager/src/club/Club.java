@@ -94,7 +94,7 @@ public class Club {
 			}
 		}
 		
-		sb.append("Facilities: \n");
+		sb.append("\nFacilities: \n");
 		for (Facility facility : facilities.values()) {
 			if (facility != null) {
 				sb.append(facility);

@@ -27,7 +27,7 @@ public class Member extends Person {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.getFirstName(), this.getSecondName(), this.getSurname(), this.getMembershipNumber());
+		return Objects.hash(this.getFirstName(), this.getSecondName(), this.getSurname(), this.membershipNumber);
 	}
 
 	@Override
@@ -38,9 +38,11 @@ public class Member extends Person {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		
 		Member other = (Member) obj;
 		if (membershipNumber != other.membershipNumber)
 			return false;
+		
 		return true;
 	}
 }

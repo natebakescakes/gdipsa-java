@@ -51,9 +51,11 @@ public class Facility {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		
 		Facility other = (Facility) obj;
 		if (this.name != other.name)
 			return false;
+		
 		return true;
 	}
 }
