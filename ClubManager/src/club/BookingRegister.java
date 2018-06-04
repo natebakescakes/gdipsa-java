@@ -11,29 +11,12 @@ public class BookingRegister {
 		super();
 		this.bookingRegister = new HashMap<Facility, ArrayList<Booking>>();
 	}
-
-	public ArrayList<Booking> getBookings(
-			Facility facility, LocalDateTime startDateRange, LocalDateTime endDateRange) {
-		ArrayList<Booking> bookingResult = new ArrayList<Booking>();
-		
-		for (Booking b : this.bookingRegister.get(facility)) {
-			if (b.getStartDate().isAfter(startDateRange) && b.getEndDate().isBefore(endDateRange)) {
-				bookingResult.add(b);
-			}
-		}
-		
-		return bookingResult;
-	}
 	
 	public void addBooking(Member member, Facility facility, LocalDateTime startDate, LocalDateTime endDate) 
 			throws BadBookingException {
 		Booking booking;
 		
-		try {
-			booking = new Booking(member, facility, startDate, endDate);
-		} catch (BadBookingException e) {
-			return;
-		}
+		booking = new Booking(member, facility, startDate, endDate);
 		
 		if (this.bookingRegister.get(facility) == null) {
 			// Instantiate ArrayList and add booking into list
@@ -51,5 +34,26 @@ public class BookingRegister {
 			
 			this.bookingRegister.get(facility).add(booking);
 		}
+	}
+
+	public ArrayList<Booking> getBookings(
+			Facility facility, LocalDateTime startDateRange, LocalDateTime endDateRange) {
+		if (this.bookingRegister.get(facility) == null) return new ArrayList<Booking>();
+		
+		ArrayList<Booking> bookingResult = new ArrayList<Booking>();
+		
+		for (Booking b : this.bookingRegister.get(facility)) {
+			if (b.getStartDate().isAfter(startDateRange) && b.getEndDate().isBefore(endDateRange)) {
+				bookingResult.add(b);
+			}
+		}
+		
+		return bookingResult;
+	}
+	
+	public void removeBooking(Booking booking) {
+		this.bookingRegister.get(booking.getFacility()).remove(booking);
+		
+		return;
 	}
 }

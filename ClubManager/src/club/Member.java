@@ -2,7 +2,7 @@ package club;
 
 import java.util.Objects;
 
-public class Member extends Person {
+public class Member extends Person implements Comparable<Member> {
 	
 	private int membershipNumber;
 
@@ -18,6 +18,12 @@ public class Member extends Person {
 
 	public int getMembershipNumber() {
 		return membershipNumber;
+	}
+
+	@Override
+	public int compareTo(Member o) {
+		return this.membershipNumber < o.getMembershipNumber() ? 
+			-1 : this.membershipNumber > o.getMembershipNumber() ? 1 : 0;
 	}
 
 	@Override

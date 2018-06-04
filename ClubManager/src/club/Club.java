@@ -1,6 +1,8 @@
 package club;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Club {
@@ -8,11 +10,13 @@ public class Club {
 	private int membershipNumber;
 	private ArrayList<Member> members;
 	private HashMap<String, Facility> facilities;
+	private BookingRegister bookingRegister;
 
 	public Club(int initMemberSize) {
 		membershipNumber = 0;
 		members = new ArrayList<Member>();
 		facilities = new HashMap<String, Facility>();
+		bookingRegister = new BookingRegister();
 	}
 	
 	// Member Management
@@ -60,6 +64,12 @@ public class Club {
 		return null;
 	}
 	
+	public void sortByMemNumber() {
+		Collections.sort(this.members);
+		
+		return;
+	}
+	
 	// Facility Management
 	
 	public Facility getFacility(String name) {
@@ -95,6 +105,17 @@ public class Club {
 		
 		return;
 	}
+	
+	public void addBooking(
+			int membershipNumber, String facilityName, LocalDateTime startDate, LocalDateTime endDate) 
+			throws BadBookingException {
+		
+		bookingRegister.addBooking(
+				members.stream().filter(x -> x.getMembershipNumber() == membershipNumber).findFirst().get(),
+				facilities.get(facilityName), 
+				startDate, 
+				endDate);
+	}
 
 	@Override
 	public String toString() {
@@ -113,6 +134,17 @@ public class Club {
 			if (facility != null) {
 				sb.append(facility);
 				sb.append("\n");
+				
+				if (bookingRegister.getBookings(facility, LocalDateTime.of(2017, 1, 1, 0, 0), 
+						LocalDateTime.of(2018, 12, 31, 0, 0)) != null) {
+					for (Booking booking : bookingRegister.getBookings(
+							facility, 
+							LocalDateTime.of(2017, 1, 1, 0, 0), 
+							LocalDateTime.of(2018, 12, 31, 0, 0))) {
+						sb.append(booking);
+						sb.append("\n");
+					}
+				}
 			}
 		}
 		

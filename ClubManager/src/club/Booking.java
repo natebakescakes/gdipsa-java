@@ -48,4 +48,10 @@ public class Booking {
 		
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("Booking [member=%s, facility=%s, startDate=%s, endDate=%s]", member, facility, startDate,
+				endDate);
+	}
 }
