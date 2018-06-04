@@ -1,4 +1,4 @@
-package club;
+package model;
 
 import java.util.Objects;
 

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import model.Facility;
+import model.Member;
+
 public class Club {
 	
 	private int membershipNumber;

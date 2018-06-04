@@ -2,6 +2,9 @@ package club;
 
 import java.time.LocalDateTime;
 
+import model.Facility;
+import model.Member;
+
 public class Booking {
 	private Member member;
 	private Facility facility;

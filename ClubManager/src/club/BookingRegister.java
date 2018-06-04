@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import model.Facility;
+import model.Member;
+
 public class BookingRegister {
 	private HashMap<Facility, ArrayList<Booking>> bookingRegister;
 
